@@ -2,11 +2,13 @@ module Lib
     ( grid
     , languages
     , findWord
+    , findWords
     , findWordInLine
     , formatGrid
     , renderGrid ) where
 
-import Data.List
+import Data.List (isInfixOf)
+import Data.Maybe (catMaybes)
 
 type Grid = [String]
 
@@ -16,10 +18,16 @@ renderGrid grid = putStrLn (formatGrid grid)
 formatGrid :: Grid -> String
 formatGrid = unlines
 
-findWord :: Grid -> String -> Bool
+findWord :: Grid -> String -> Maybe String
 findWord gird word =
     let possibilities = grid ++ (map reverse grid)
-    in or (map (findWordInLine word) possibilities)
+        found = or (map (findWordInLine word) possibilities)
+    in if found then Just word else Nothing
+
+findWords :: Grid -> [String] -> [String]
+findWords grid words = 
+    let foundWords = map(findWord grid) words
+    in catMaybes foundWords
 
 findWordInLine :: String -> String -> Bool
 findWordInLine word line = word `isInfixOf` line
