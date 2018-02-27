@@ -3,6 +3,6 @@ import Test.Hspec
 
 main :: IO ()
 main = hspec $ do
-    describe "How to write a test" $ do
-        it "Should be able to run tests" $ do
-            someString `shouldBe` "someString"git
+    describe "Test findWords function" $ do
+        it "Should find all languages contained by the grid" $ do
+            and (map (findWord grid) languages) `shouldBe` True

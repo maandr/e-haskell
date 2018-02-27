@@ -10,14 +10,16 @@ import Data.List
 
 type Grid = [String]
 
-renderGrid :: IO ()
-renderGrid = putStrLn (formatGrid grid)
+renderGrid :: Grid -> IO ()
+renderGrid grid = putStrLn (formatGrid grid)
 
 formatGrid :: Grid -> String
 formatGrid = unlines
 
 findWord :: Grid -> String -> Bool
-findWord gird word = or (map (findWordInLine word) grid)
+findWord gird word =
+    let possibilities = grid ++ (map reverse grid)
+    in or (map (findWordInLine word) possibilities)
 
 findWordInLine :: String -> String -> Bool
 findWordInLine word line = word `isInfixOf` line
