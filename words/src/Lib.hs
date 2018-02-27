@@ -1,5 +1,6 @@
 module Lib
-    ( getPossibilities
+    ( Grid
+    , getPossibilities
     , skew
     , findWord
     , findWords
