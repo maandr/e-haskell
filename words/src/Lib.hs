@@ -1,15 +1,29 @@
 module Lib
     ( grid
     , languages
+    , findWord
+    , findWordInLine
     , formatGrid
     , renderGrid ) where
+
+import Data.List
+
+type Grid = [String]
 
 renderGrid :: IO ()
 renderGrid = putStrLn (formatGrid grid)
 
-formatGrid :: [String] -> String
+formatGrid :: Grid -> String
 formatGrid = unlines
 
+findWord :: Grid -> String -> Bool
+findWord gird word = or (map (findWordInLine word) grid)
+
+findWordInLine :: String -> String -> Bool
+findWordInLine word line = word `isInfixOf` line
+--findWordInLine = isInfixOf
+
+grid :: Grid
 grid = [  "__C________R___"
         , "__SI________U__"
         , "__HASKELL____B_"
