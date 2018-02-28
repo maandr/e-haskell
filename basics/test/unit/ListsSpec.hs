@@ -23,18 +23,16 @@ spec = do
     describe "length" $ do
         it "Should return the length of a list" $ do
             length [1, 2, 3] `shouldBe` 3
+            length "Hello" `shouldBe` 5
         it "Should return the length of a empty list" $ do
             length [] `shouldBe` 0
-        it "Should return the length of a string" $ do
-            length "Hello" `shouldBe` 5
 
     describe "head" $ do
         it "Should return the head of a list" $ do
             head [1, 2, 3] `shouldBe` 1
+            head "Hello" `shouldBe` 'H'
         it "Should return the head of a infinit list" $ do
             head [3, 6 ..] `shouldBe` 3
-        it "Should return the head of a string" $ do
-            head "Hello" `shouldBe` 'H'
     
     describe "tail" $ do
         it "Should return the tail of a list" $ do
@@ -56,6 +54,11 @@ spec = do
         it "Should take a literal and repeat it into an infinit list" $ do
             (take 5 $ repeat 5) `shouldBe` [5, 5, 5, 5 ,5]
             (take 3 $ repeat "na") `shouldBe` ["na", "na", "na"]
+    
+    describe "cycle" $ do
+        it "Should take a list and repeat it into an infinit list" $ do
+            (take 6 $ cycle [1, 2]) `shouldBe` [1, 2, 1, 2, 1, 2]
+            (take 7 $ cycle "dumdi") `shouldBe` "dumdidu"
 
     describe "concat" $ do
         it "Should concatinate a list of lists" $ do
@@ -66,6 +69,12 @@ spec = do
             concat ["na", "na", "na"] `shouldBe` "nanana"
         it "Should concatinate two empty lists" $ do
             concat [[] :: [Int], [] :: [Int]] `shouldBe` []
+
+    describe "map" $ do
+        it "Should apply a function to each element of a list" $ do
+            map (\x -> x * x) [1, 2, 3] `shouldBe` [1, 4, 9]
+            map (\x -> x + x) [5, 10, 20] `shouldBe` [10, 20, 40]
+            map isEvan [0..5] `shouldBe` [True, False, True, False, True, False]
 
     describe "isEvan" $ do
         it "Should return True given an evan number" $ do
