@@ -2,14 +2,19 @@ module CurryingSpec where
 
 import Test.Hspec
 
--- adds two ints together
-add :: Int -> Int -> Int
-add a b = a + b
+-- curried function
+curriedAdd :: Int -> Int -> Int
+curriedAdd a b = a + b
 
--- re-using a partially applied function
--- can also be written as add5 x = add 5 x
+-- un-curried function
+uncurriedAdd :: (Int, Int) -> Int
+uncurriedAdd (a, b) = a + b
+
+-- advantage of a curried functions over a un-curried function
+-- is that is can be re-used when partially applied.
 add5 :: Int -> Int
-add5 = add 5
+add5 x = curriedAdd 5 x
+-- add5 = curriedAdd 5
 
 -- composing two functions
 add10 :: Int -> Int
@@ -18,7 +23,13 @@ add10 = add5 . add5
 spec :: Spec
 spec = do
 
-    describe "Partial application" $ do
+    describe "curried vs un-curried functions" $ do
+        it "Should add two literals using a curried function" $ do
+            curriedAdd 10 5 `shouldBe` 15
+        it "Should add two literals using a un-curried function" $ do
+            uncurriedAdd(10, 5) `shouldBe` 15
+
+    describe "partial application" $ do
         it "Should add 5 to a given literal" $ do
             add5 5 `shouldBe` 10
         it "Should add 10 to a given literal" $ do
