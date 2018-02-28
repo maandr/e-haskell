@@ -44,6 +44,7 @@ spec = do
         it "Should take given amount of literals from a list" $ do
             take 1 [1, 2, 3] `shouldBe` [1]
             take 2 [1, 2, 3] `shouldBe` [1, 2]
+            take 3 ['a'..'z'] `shouldBe` ['a', 'b', 'c']
             take 3 "Hello" `shouldBe` ['H', 'e', 'l']
         it "Should take given amount of literals from a infinit list" $ do
             take 3 [2, 4..] `shouldBe` [2, 4, 6]
@@ -59,6 +60,13 @@ spec = do
         it "Should take a list and repeat it into an infinit list" $ do
             (take 6 $ cycle [1, 2]) `shouldBe` [1, 2, 1, 2, 1, 2]
             (take 7 $ cycle "dumdi") `shouldBe` "dumdidu"
+
+    describe "zip" $ do
+        it "Should take a list and combine it with another list" $ do
+            zip [1, 2, 3] ['a', 'b', 'c'] `shouldBe` [(1, 'a'), (2, 'b'), (3, 'c')]
+        it "Should should stop if any of the two lists is exhausted" $ do
+            zip [1, 2, 3] ['a'..'z'] `shouldBe` [(1, 'a'), (2, 'b'), (3, 'c')]
+            zip [1..] ['a'..'c'] `shouldBe` [(1, 'a'), (2, 'b'), (3, 'c')]
 
     describe "concat" $ do
         it "Should concatinate a list of lists" $ do
