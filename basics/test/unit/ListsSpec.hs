@@ -1,8 +1,10 @@
+module ListsSpec where
+ 
 import Lists
 import Test.Hspec
 
-main :: IO ()
-main = hspec $ do
+spec :: Spec
+spec = do
 
     describe "(:)" $ do
         it "Should prepend literal to a list" $ do
