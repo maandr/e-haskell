@@ -6,6 +6,14 @@ import Test.Hspec
 spec :: Spec
 spec = do
 
+    describe "(!!)" $ do
+        it "Should return the element at a given position from the list" $ do
+            [1, 2, 3] !! 1 `shouldBe` 2
+            "Haskell" !! 0 `shouldBe` 'H'
+        it "Should return the element at a given position from an infinit list" $ do
+            [0..] !! 999 `shouldBe` 999
+            [1..] !! 999 `shouldBe` 1000
+
     describe "(:)" $ do
         it "Should prepend literal to a list" $ do
             3 : [1, 2] `shouldBe` [3, 1, 2]
