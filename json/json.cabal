@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a4876c706086704c9b3dca36cbfb564c63443bfd536c59baed357c2e17d17240
+-- hash: 2a29571d0029eb6fc5ec1cd01928c09e98912acc4c98a56fadab83b2b5cd0154
 
 name:           json
 version:        0.1.0.0
@@ -42,7 +42,8 @@ executable aeson-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , json
   other-modules:
       Paths_json
@@ -59,6 +60,9 @@ test-suite unit-test
     , base >=4.7 && <5
     , hspec
     , json
+    , text
+    , unordered-containers
+    , vector
   other-modules:
       AesonSpec
       Paths_json
