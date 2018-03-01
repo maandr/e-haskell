@@ -1,0 +1,65 @@
+-- This file has been generated from package.yaml by hpack version 0.20.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: a4876c706086704c9b3dca36cbfb564c63443bfd536c59baed357c2e17d17240
+
+name:           json
+version:        0.1.0.0
+description:    Please see the README on Github at <https://github.com/maandr/aeson#readme>
+homepage:       https://github.com/maandr/aeson#readme
+bug-reports:    https://github.com/maandr/aeson/issues
+author:         Mats Andresen
+maintainer:     mandresen@papego.de
+copyright:      BSD
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    ChangeLog.md
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/maandr/aeson
+
+library
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_json
+  default-language: Haskell2010
+
+executable aeson-exe
+  main-is: Main.hs
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , json
+  other-modules:
+      Paths_json
+  default-language: Haskell2010
+
+test-suite unit-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  hs-source-dirs:
+      test/unit
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , hspec
+    , json
+  other-modules:
+      AesonSpec
+      Paths_json
+  default-language: Haskell2010
