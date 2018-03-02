@@ -24,13 +24,13 @@ spec :: Spec
 spec = do
 
     describe "curried vs un-curried functions" $ do
-        it "Should add two literals using a curried function" $ do
+        it "should add two literals using a curried function" $ do
             curriedAdd 10 5 `shouldBe` 15
-        it "Should add two literals using a un-curried function" $ do
+        it "should add two literals using a un-curried function" $ do
             uncurriedAdd(10, 5) `shouldBe` 15
 
     describe "partial application" $ do
-        it "Should add 5 to a given literal" $ do
+        it "should add 5 to a given literal" $ do
             add5 5 `shouldBe` 10
-        it "Should add 10 to a given literal" $ do
+        it "should add 10 to a given literal" $ do
             add10 10 `shouldBe` 20
