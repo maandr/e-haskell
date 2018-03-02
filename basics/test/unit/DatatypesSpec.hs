@@ -17,9 +17,12 @@ runOverAnimal :: Animal -> Animal
 runOverAnimal (Dillo _ weight) = Dillo False weight
 runOverAnimal (Rattlesnake length _) = Rattlesnake length 0.0
 
-runOverAnimals :: [Animal] -> [Animal]
-runOverAnimals [] = []
-runOverAnimals (x:xs) = runOverAnimal x : runOverAnimals xs
+runOverAnimalsPure :: [Animal] -> [Animal]
+runOverAnimalsPure [] = []
+runOverAnimalsPure (x:xs) = runOverAnimal x : runOverAnimalsPure xs
+
+runOverAnimalsFMap :: [Animal] -> [Animal]
+runOverAnimalsFMap animals = fmap runOverAnimal animals
 
 spec :: Spec
 spec = do
@@ -52,20 +55,34 @@ spec = do
 
             -- then
             overrunSnake `shouldBe` Rattlesnake 115.5 0.0
-    describe "runOverAnimals" $ do
+    describe "runOverAnimalsPure" $ do
         it "should run over all given animals" $ do
             -- given
-            let animals =
-                    [ (Dillo True 30.3)
-                    , (Rattlesnake 55.3 4.0)
-                    , (Dillo True 45.5)
-                    ]
+            let animals = givenAnimals
 
             -- when
-            let overrunAnimals = runOverAnimals animals
+            let overrunAnimals = runOverAnimalsPure animals
 
             -- then
             overrunAnimals `shouldBe` [(Dillo False 30.3), (Rattlesnake 55.3 0.0), (Dillo False 45.5)]
 
         it "should run over empty list of animals" $ do
-            runOverAnimals [] `shouldBe` []
+            runOverAnimalsPure [] `shouldBe` []
+
+    describe "runOverAnimalsFMap" $ do
+        it "should run over all given animals" $ do
+            -- given
+            let animals = givenAnimals
+
+            -- when
+            let overrunAnimals = runOverAnimalsFMap animals
+
+            -- then
+            overrunAnimals `shouldBe` [(Dillo False 30.3), (Rattlesnake 55.3 0.0), (Dillo False 45.5)]
+
+givenAnimals :: [Animal]
+givenAnimals =
+    [ (Dillo True 30.3)
+    , (Rattlesnake 55.3 4.0)
+    , (Dillo True 45.5)
+    ]
