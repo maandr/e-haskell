@@ -56,7 +56,7 @@ spec = do
             -- then
             overrunSnake `shouldBe` Rattlesnake 115.5 0.0
     describe "runOverAnimalsPure" $ do
-        it "should run over all given animals" $ do
+        it "should apply runOverAnimal to all animals in a given list" $ do
             -- given
             let animals = givenAnimals
 
@@ -66,11 +66,11 @@ spec = do
             -- then
             overrunAnimals `shouldBe` [(Dillo False 30.3), (Rattlesnake 55.3 0.0), (Dillo False 45.5)]
 
-        it "should run over empty list of animals" $ do
+        it "should return empty list when given a empty list" $ do
             runOverAnimalsPure [] `shouldBe` []
 
     describe "runOverAnimalsFMap" $ do
-        it "should run over all given animals" $ do
+        it "should apply runOverAnimal to all animals in a given list" $ do
             -- given
             let animals = givenAnimals
 
@@ -79,6 +79,8 @@ spec = do
 
             -- then
             overrunAnimals `shouldBe` [(Dillo False 30.3), (Rattlesnake 55.3 0.0), (Dillo False 45.5)]
+        it "should return empty list when given a empty list" $ do
+            runOverAnimalsFMap [] `shouldBe` []
 
 givenAnimals :: [Animal]
 givenAnimals =
