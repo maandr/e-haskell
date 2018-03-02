@@ -92,6 +92,12 @@ spec = do
             map (\x -> x + x) [5, 10, 20] `shouldBe` [10, 20, 40]
             map isEvan [0..5] `shouldBe` [True, False, True, False, True, False]
 
+    describe "fmap" $ do
+        it "should apply a function to each element of a list" $ do
+            fmap (\x -> x + x) [1, 2, 3] `shouldBe` [2, 4, 6]
+            fmap (\x -> x + 10) [5, 10, 20] `shouldBe` [15, 20, 30]
+            fmap isEvan [0..5] `shouldBe` [True, False, True, False, True, False]
+
     describe "isEvan" $ do
         it "Should return True given an evan number" $ do
             isEvan 2 `shouldBe` True
