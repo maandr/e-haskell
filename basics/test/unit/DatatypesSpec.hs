@@ -42,6 +42,7 @@ spec = do
 
             -- then
             overrunDillo `shouldBe` Dillo False 45.5
+
         it "should flat a rattlesnake when overrunning it" $ do
             -- given
             let snake = Rattlesnake 115.5 5.3
@@ -65,3 +66,6 @@ spec = do
 
             -- then
             overrunAnimals `shouldBe` [(Dillo False 30.3), (Rattlesnake 55.3 0.0), (Dillo False 45.5)]
+
+        it "should run over empty list of animals" $ do
+            runOverAnimals [] `shouldBe` []
