@@ -21,12 +21,17 @@ spec = do
             7 : [] `shouldBe` [7]
         it "should prepend literal to a string"  $ do
             'A' : " Ton Of Love" `shouldBe` "A Ton Of Love"
-        
+        it "should prepend tuple to list of tuples" $ do
+            ("k1", "v1") : [("k0", "v0")] `shouldBe` [("k1", "v1"), ("k0", "v0")]
+
     describe "(++)" $ do
         it "should append list to another list" $ do
             [1, 2] ++ [3, 4] `shouldBe` [1, 2, 3, 4]
         it "should concatinate two strings" $ do
             "Hello" ++ " World" `shouldBe` "Hello World"
+        it "should concatinate a list of two tuples" $ do
+            [("k1", "v1")] ++ [("k0", "v0")] `shouldBe` [("k1", "v1"), ("k0", "v0")]
+            [("k0", "v0")] ++ [("k1", "v1")] `shouldBe` [("k0", "v0"), ("k1", "v1")]
 
     describe "length" $ do
         it "should return the length of a list" $ do
