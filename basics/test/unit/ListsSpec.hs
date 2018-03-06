@@ -40,6 +40,14 @@ spec = do
         it "should return the length of a empty list" $ do
             length [] `shouldBe` 0
 
+    describe "elem" $ do
+        it "should return True if a element is in a list" $ do
+            elem 3 [1, 2, 3, 4] `shouldBe` True
+            elem 'p' "Hodgepodge" `shouldBe` True
+        it "should return False if a element is not in a list" $ do
+            elem 5 [1, 2, 3, 4] `shouldBe` False
+            elem 's' "Hodegpodge" `shouldBe` False
+
     describe "head" $ do
         it "should return the head of a list" $ do
             head [1, 2, 3] `shouldBe` 1
