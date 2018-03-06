@@ -16,6 +16,10 @@ import Data.Aeson.Types (
 import GHC.Exts ( fromList ) 
 import Test.Hspec
 
+parseTuples :: Value -> Parser [(String, Int)]
+parseTuples (Array array) = mapM parseTuple (Vector.toList array)
+parseTuples value = fail $ "expected an array but got: " ++ show value
+
 parseTuple :: Value -> Parser (String, Int)
 parseTuple (Object object) = do
     let maybeNameField = HashMap.lookup "name" object
@@ -56,3 +60,12 @@ spec = do
 
             -- when + then
             (parseEither parseTuple json) `shouldBe` Right ("John", 45)
+    
+    describe "parseTuples" $ do
+        it "should parse json to a list of tuples" $ do
+            -- given
+            let jsonString = "[{\"name\":\"John\",\"age\":45},{\"name\":\"Mary\",\"age\":32}]"
+            let Just json = decode jsonString :: Maybe Value
+
+            -- when + then
+            (parseEither parseTuples json) `shouldBe` Right [("John", 45), ("Mary", 32)]
