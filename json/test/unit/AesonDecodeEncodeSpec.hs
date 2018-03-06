@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module AesonSpec where
+module AesonDecodeEncodeSpec where
 
 import Data.Text
 import Data.Aeson

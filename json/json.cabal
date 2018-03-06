@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8d8a85d5249387a677ed5d12fc50e0de6e8687a596c3aa48ecc2ca2fb046693f
+-- hash: 57862dad61e97040e82322ebf70a42cc2faa6aec3d4abb8f90acd59299a3c57a
 
 name:           json
 version:        0.1.0.0
@@ -65,7 +65,7 @@ test-suite unit-test
     , unordered-containers
     , vector
   other-modules:
-      AesonSpec
-      PersonSpec
+      AesonDecodeEncodeSpec
+      AesonParserSpec
       Paths_json
   default-language: Haskell2010
