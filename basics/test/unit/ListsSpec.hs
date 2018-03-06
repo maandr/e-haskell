@@ -54,11 +54,20 @@ spec = do
             head "Hello" `shouldBe` 'H'
         it "should return the head of a infinit list" $ do
             head [3, 6 ..] `shouldBe` 3
+
+    describe "last" $ do
+        it "should return the last element of a list" $ do
+            last [1, 2, 3] `shouldBe` 3
+            last "Hello" `shouldBe` 'o'
+    
+    describe "init" $ do
+        it "should return the start of a list" $ do
+            init [1, 2, 3] `shouldBe` [1, 2]
+            init "Hello" `shouldBe` "Hell"
     
     describe "tail" $ do
         it "should return the tail of a list" $ do
             tail [1, 2, 3] `shouldBe` [2, 3]
-        it "should return the tail of a string" $ do
             tail "Hello" `shouldBe` "ello"
     
     describe "take" $ do
