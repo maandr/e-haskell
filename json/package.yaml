@@ -51,4 +51,5 @@ tests:
     - aeson
     - text
     - vector
+    - scientific
     - unordered-containers
