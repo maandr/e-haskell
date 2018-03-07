@@ -2,6 +2,18 @@ module DatatypesSpec where
 
 import Test.Hspec
 
+-- typeclass
+class ToString a where
+    toString :: a -> String
+
+-- implementation of typeclass ToString for type Mood
+instance ToString Mood where
+    toString mood = show mood
+
+-- implementation of typeclass ToString for type Int
+instance ToString Int where
+    toString int = show int
+
 data Mood = Good | Bad deriving ( Eq, Show )
 
 changeMood :: Mood -> Mood
@@ -26,6 +38,20 @@ runOverAnimalsFMap animals = fmap runOverAnimal animals
 
 spec :: Spec
 spec = do
+
+    describe "toString" $ do
+        it "should convert a mood to a string" $ do
+            -- given
+            let myMood = Bad :: Mood
+
+            -- when + then
+            toString myMood `shouldBe` "Bad"
+        it "should convert a integer to a string" $ do
+            -- given
+            let int = 99 :: Int
+
+            -- when + then
+            toString int `shouldBe` "99"
 
     describe "changeMood" $ do
         it "should inverse the current value of mood" $ do
