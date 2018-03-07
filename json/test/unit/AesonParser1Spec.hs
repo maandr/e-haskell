@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module AesonParserSpec where
+module AesonParser1Spec where
 
 import qualified Data.Vector as Vector
 import qualified Data.HashMap.Strict as HashMap
