@@ -6,7 +6,12 @@ import qualified Data.Vector as Vector
 import qualified Data.HashMap.Strict as HashMap
 import Data.Text
 import Data.Scientific ( toBoundedInteger )
-import Data.Aeson ( decode )
+import Data.Aeson (
+          decode
+        , withArray
+        , withObject
+        , parseJSON
+    )
 import Data.Aeson.Types (
           Parser
         , Value(..)
@@ -17,37 +22,24 @@ import GHC.Exts ( fromList )
 import Test.Hspec
 
 parseTuples :: Value -> Parser [(String, Int)]
-parseTuples (Array array) = mapM parseTuple (Vector.toList array)
-parseTuples value = fail $ "expected an array but got: " ++ show value
+parseTuples = withArray "array of tuples" $ \array -> mapM parseTuple (Vector.toList array)
 
 parseTuple :: Value -> Parser (String, Int)
-parseTuple (Object object) = do
-    let maybeNameField = HashMap.lookup "name" object
-        maybeAgeField = HashMap.lookup "age" object
+parseTuple = withObject "tuple" $ \object -> do
+    -- parse name
+    name <- case HashMap.lookup "name" object of
+        Just x -> parseJSON x
+        Nothing -> fail $ fieldDoesNotExist "name"
 
-    nameField <- case maybeNameField of
-        Just x -> return x
-        Nothing -> fail "Field 'name' does not exist"
+    -- parse age
+    age <- case HashMap.lookup "age" object of
+        Just x -> parseJSON x
+        Nothing -> fail $ fieldDoesNotExist "age"
     
-    name <- case nameField of
-        String x -> return (unpack x)
-        _ -> fail "Field 'name' must be a string"
-    
-    ageField <- case maybeAgeField of
-        Just x -> return x
-        Nothing -> fail "Field 'age' does not exist"
-
-    maybeAge <- case ageField of
-        Number x -> return $ toBoundedInteger x
-        _ -> fail "Field 'age' must be a number"
-    
-    age <- case maybeAge of
-        Just x -> return x
-        Nothing -> fail "Field 'age' has to be a integer"
-
     return (name, age)
 
-parseTuple val = fail $ "exptected an object but got: " ++ show val
+fieldDoesNotExist :: String -> String
+fieldDoesNotExist fieldName = "Field '" ++ fieldName ++ "' does not exist"
 
 spec :: Spec
 spec = do
