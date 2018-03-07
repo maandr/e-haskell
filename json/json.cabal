@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 32ffd2ab0a135c9a9923039c74aae2d8409552c056a26140b7dd790eaabeacbb
+-- hash: 3519c3054d7e60f8a3dc4fadc60845d819ed7de12deed84734b2a644e868313d
 
 name:           json
 version:        0.1.0.0
@@ -68,5 +68,6 @@ test-suite unit-test
       AesonDecodeEncodeSpec
       AesonParser1Spec
       AesonParser2Spec
+      AesonParser3Spec
       Paths_json
   default-language: Haskell2010
