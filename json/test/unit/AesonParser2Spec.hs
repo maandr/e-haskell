@@ -11,6 +11,7 @@ import Data.Aeson (
         , withArray
         , withObject
         , parseJSON
+        , (.:)
     )
 import Data.Aeson.Types (
           Parser
@@ -26,16 +27,8 @@ parseTuples = withArray "array of tuples" $ \array -> mapM parseTuple (Vector.to
 
 parseTuple :: Value -> Parser (String, Int)
 parseTuple = withObject "tuple" $ \object -> do
-    -- parse name
-    name <- case HashMap.lookup "name" object of
-        Just x -> parseJSON x
-        Nothing -> fail $ fieldDoesNotExist "name"
-
-    -- parse age
-    age <- case HashMap.lookup "age" object of
-        Just x -> parseJSON x
-        Nothing -> fail $ fieldDoesNotExist "age"
-    
+    name <- object .: "name"
+    age <- object .: "age"
     return (name, age)
 
 fieldDoesNotExist :: String -> String
