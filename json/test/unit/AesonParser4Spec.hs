@@ -50,9 +50,8 @@ spec = do
     describe "FromJSON" $ do
         it "should deserialize JSON to a person" $ do
             -- given
-            let jsonString = ("{\"age\":45,\"name\":\"John\"}")
-            let Just json = (decode jsonString) :: Maybe Value
+            let jsonString = "{\"age\":45,\"name\":\"John\"}"
+            let Just json = decode jsonString :: Maybe Value
 
             -- when + then
             (parseEither parseJSON json) `shouldBe` Right (Person "John" 45)
-            
