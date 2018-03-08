@@ -4,7 +4,8 @@ module FunctorSpec where
 
 import Test.Hspec
 
--- typeclass is empty
+-- typeclass IsEmpty
+-- enforeces types to provide a isEmpty function
 class IsEmpty a where
     isEmpty :: a -> Bool
 
@@ -13,14 +14,14 @@ data Optional a = Null | Optional {
     value :: a
 } deriving (Eq, Show)
 
--- have Optional implement typeclass Functor
+-- have Optional implement typeclass Functor (fmap)
 instance Functor Optional where
     fmap f Optional{..} = Optional {
         value = f value
     }
     fmap _ Null = Null
 
--- have Optional implement typeclass IsEmpty
+-- have Optional implement typeclass IsEmpty (isEmpty)
 instance IsEmpty (Optional a) where
     isEmpty Null = True
     isEmpty _ = False
