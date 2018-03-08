@@ -26,9 +26,6 @@ instance IsEmpty (Optional a) where
     isEmpty Null = True
     isEmpty _ = False
 
-empty :: Optional a
-empty = Null
-
 spec :: Spec
 spec = do
 
