@@ -39,11 +39,13 @@ spec = do
             encode (3.14 :: Float) `shouldBe` "3.14"
             encode False `shouldBe` "false"
             encode ("green" :: Text)  `shouldBe` "\"green\""
+
         it "should encode a list of literals to json" $ do
             encode integers `shouldBe` "[1,2,3]"
             encode floats `shouldBe` "[1.0,2.0,3.0]"
             encode bools `shouldBe` "[true,false,false]"
             encode strings  `shouldBe` "[\"green\",\"blue\",\"red\"]"
+
         it "should encode complex types to json" $ do
             encode book `shouldBe` "{\"pages\":99,\"author\":\"Franz Kafka\"}"
             encode movie `shouldBe` "{\"year\":1977,\"genres\":[\"sci-fi\",\"adventure\"],\"title\":\"Star Wars\"}"
@@ -54,6 +56,7 @@ spec = do
             (decode "3.14" :: Maybe Float) `shouldBe` Just 3.14
             (decode "false" :: Maybe Bool) `shouldBe` Just False
             (decode "\"green\"" :: Maybe String) `shouldBe` Just "green"
+
         it "should decode json to a list of literals" $ do
             (decode "[1,2,3]" :: Maybe [Int]) `shouldBe` Just [1, 2, 3]
             (decode "maleformed" :: Maybe [Int]) `shouldBe` Nothing
