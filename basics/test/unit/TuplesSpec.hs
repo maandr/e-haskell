@@ -1,12 +1,12 @@
 module TuplesSpec where
 
 import Test.Hspec
-import Data.Tuple --swap
+import Data.Tuple ( swap )
 
 spec :: Spec
 spec = do
 
-    describe "Comparison" $ do
+    describe "comparing tuples" $ do
         it "should compare equality on behalf of the tuples first component, then on second component" $ do
             (1, 5) > (2, 1) `shouldBe` False
             (2, 0) > (1, 8) `shouldBe` True

@@ -29,6 +29,9 @@ spec = do
     describe "allEqual" $ do
         it "should compare tree numbers for equality" $ do
             allEqual 2 2 2 `shouldBe` True
+            allEqual 2 2 3 `shouldBe` False
+            allEqual 2 3 2 `shouldBe` False
+            allEqual 3 2 2 `shouldBe` False
 
     describe "applyAndConcat" $ do
         it "should apply passed functions and concatinate the result" $ do
