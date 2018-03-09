@@ -28,6 +28,7 @@ spec = do
             -- when + then
             x `shouldBe` Right 10
             y `shouldBe` 10
+
         it "should unpack left value of Either" $ do
             -- given
             let x = Left "fail" :: Either String Int
@@ -36,7 +37,6 @@ spec = do
             -- when + then
             x `shouldBe` Left "fail"
             y `shouldBe` "fail"
-
     
     describe "safeDiv" $ do
         it "should divide two floats" $ do
